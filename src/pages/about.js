@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import Layout from '../components/layout';
+
 
 const AboutPage = () => {
     return(
-        <div> 
+        <Layout> 
             <h1>About Me</h1>
             <p>Yo soy Ignacio Bejarano, estudie ingenieria mecanica en la universidad
                 de buenos aires, pero ahora me encuentro transisionando al desarrollo web
@@ -11,8 +13,7 @@ const AboutPage = () => {
                 para mantenerse actualizado y asi poder emerger en el mercado competitivo.
                 </p>   
             <p>Need a developer? <Link to="/contact">Contact me.</Link></p>
-
-        </div>
+        </Layout>
     )
 }
 
