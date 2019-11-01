@@ -7,6 +7,7 @@ import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import BlogPreview from './blog';
 
 const useStyles = makeStyles(theme => ({
     toolbar: {
@@ -166,7 +167,7 @@ return(
 {/*  insertar Blog Component Aca (renombrar a preview) */}
 <Grid container spacing={5} className={classes.mainGrid}>
   {/* Main content */}
-  {/* End main content */}
+  <BlogPreview />
   {/* Sidebar */}
   <Grid item xs={12} md={4}>
     <Paper elevation={0} className={classes.sidebarAboutBox}>

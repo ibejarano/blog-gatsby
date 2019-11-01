@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const BlogPage = () => {
+const BlogPreview = () => {
 
   const classes = useStyles();
 
@@ -136,14 +136,10 @@ const BlogPage = () => {
     })
 
     return(
-        <Layout>
-          <Head  title="Blogs"/>
-        <h1>Blog</h1>
           <Grid container spacing={4}>
             {BlogTitles}
           </Grid>
-        </Layout>
     )
 }
 
-export default BlogPage;
+export default BlogPreview;
