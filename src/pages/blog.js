@@ -3,6 +3,7 @@ import Layout from '../components/layout';
 import { Link, graphql, useStaticQuery } from 'gatsby';
 import Head from '../components/head';
 
+import Divider from '@material-ui/core/Divider';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -59,6 +60,7 @@ const useStyles = makeStyles(theme => ({
   },
   card: {
     display: 'flex',
+    marginBottom: '1rem'
   },
   cardDetails: {
     flex: 1,
@@ -106,7 +108,7 @@ const BlogPreview = () => {
 
   const BlogTitles = data.allContentfulBlogPost.edges.map( (post) => {
         return(
-          <Grid item key={post.node.title} xs={12} md={6}>
+          <Grid item key={post.node.title}>
           <CardActionArea component="a" href="#">
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
@@ -131,12 +133,14 @@ const BlogPreview = () => {
               </Hidden>
             </Card>
           </CardActionArea>
+          <Divider />
+
         </Grid>
         )
     })
 
     return(
-          <Grid container spacing={4}>
+          <Grid item spacing={5} xs={12} md={8} >
             {BlogTitles}
           </Grid>
     )
