@@ -84,6 +84,9 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(8),
     padding: theme.spacing(6, 0),
   },
+  link: {
+    textDecoration: 'none',
+  },
 }));
 
 const BlogPreview = () => {
@@ -97,6 +100,8 @@ const BlogPreview = () => {
           node {
             title
             slug
+            description
+            topic
             publishedDate (
               formatString: "MMMM Do, YYYY"
             )
@@ -109,32 +114,35 @@ const BlogPreview = () => {
   const BlogTitles = data.allContentfulBlogPost.edges.map( (post) => {
         return(
           <Grid item key={post.node.title}>
-          <Link to={`/blog/${post.node.slug}`} >
-          <CardActionArea component="Link"  >
-            <Card className={classes.card}>
-              <div className={classes.cardDetails}>
-                <CardContent>
-                  <Typography component="h2" variant="h5">
-                    {post.node.title}
-                  </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    {post.date}
-                  </Typography>
-                  <Typography variant="subtitle1" color="primary">
-                    Cotinuar leyendo...
-                  </Typography>
-                </CardContent>
-              </div>
-              <Hidden xsDown>
-                <CardMedia
-                  className={classes.cardMedia}
-                  image="https://source.unsplash.com/random"
-                  title="Image title"
-                  />
-              </Hidden>
-            </Card>
-          </CardActionArea>
-                  </Link>
+          <Link to={`/blog/${post.node.slug}`} className={classes.link}>
+            <CardActionArea   >
+              <Card className={classes.card}>
+                <div className={classes.cardDetails}>
+                  <CardContent>
+                    <Typography component="h2" variant="h5">
+                      {post.node.title}
+                    </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                      {post.node.publishedDate}
+                    </Typography>
+                    <Typography variant="subtitle1" color="textSecondary">
+                      {post.node.description}
+                    </Typography>
+                    <Typography variant="subtitle2" color="primary">
+                      Cotinuar leyendo...
+                    </Typography>
+                  </CardContent>
+                </div>
+                <Hidden xsDown>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image="https://source.unsplash.com/random"
+                    title="Image title"
+                    />
+                </Hidden>
+              </Card>
+            </CardActionArea>
+          </Link>
           <Divider />
 
         </Grid>
