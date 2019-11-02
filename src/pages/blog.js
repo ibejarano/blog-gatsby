@@ -120,7 +120,9 @@ const BlogPreview = () => {
                     {post.date}
                   </Typography>
                   <Typography variant="subtitle1" color="primary">
-                    Continue reading...
+                    <Link to={`/blog/${post.node.slug}`} >
+                    Cotinuar leyendp...
+                    </Link>
                   </Typography>
                 </CardContent>
               </div>

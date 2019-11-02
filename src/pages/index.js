@@ -172,11 +172,12 @@ return(
   <Grid item xs={12} md={4}>
     <Paper elevation={0} className={classes.sidebarAboutBox}>
       <Typography variant="h6" gutterBottom>
-        About
+        Sobre mi
       </Typography>
       <Typography>
-        Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit
-        amet fermentum. Aenean lacinia bibendum nulla sed consectetur.
+        Me llamo Ignacio Bejarano, ingeniero mecanico de la UBA, actualmente transicionando hacia el desarrollo Web. 
+        Escribo este blog porque soy apasionado por lo temas de actualidad y se me ocurren ideas constantemente sobre las que puedo escribir.
+        Con estas premisas he resuelto crear un blog para expresarme de manera digital.
       </Typography>
     </Paper>
     <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
