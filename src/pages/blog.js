@@ -109,7 +109,8 @@ const BlogPreview = () => {
   const BlogTitles = data.allContentfulBlogPost.edges.map( (post) => {
         return(
           <Grid item key={post.node.title}>
-          <CardActionArea component="a" href="#">
+          <Link to={`/blog/${post.node.slug}`} >
+          <CardActionArea component="Link"  >
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
@@ -120,9 +121,7 @@ const BlogPreview = () => {
                     {post.date}
                   </Typography>
                   <Typography variant="subtitle1" color="primary">
-                    <Link to={`/blog/${post.node.slug}`} >
-                    Cotinuar leyendp...
-                    </Link>
+                    Cotinuar leyendo...
                   </Typography>
                 </CardContent>
               </div>
@@ -131,10 +130,11 @@ const BlogPreview = () => {
                   className={classes.cardMedia}
                   image="https://source.unsplash.com/random"
                   title="Image title"
-                />
+                  />
               </Hidden>
             </Card>
           </CardActionArea>
+                  </Link>
           <Divider />
 
         </Grid>
