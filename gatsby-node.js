@@ -23,5 +23,19 @@ module.exports.createPages = async ({ graphql, actions}) => {
                 slug: edge.node.slug
             }
         })
+    });
+
+    const sectionTemplate = path.resolve('./src/templates/sections.js');
+
+    const sections = ['web-development', 'opinion', 'health' , 'politics']
+
+    sections.forEach((section) => {
+        createPage({
+            component: sectionTemplate,
+            path: `/${section}`,
+            context: {
+                section: section
+            }
+        })
     })
-}
+};

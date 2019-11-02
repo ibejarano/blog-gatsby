@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import Head from '../components/head';
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,7 +7,7 @@ import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import BlogPreview from './blog';
+import BlogPreview from '../components/blogPreview';
 
 const useStyles = makeStyles(theme => ({
     toolbar: {
@@ -80,22 +80,6 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-const featuredPosts = [
-{
-    title: 'Featured post',
-    date: 'Nov 12',
-    description:
-    'This is a wider card with supporting text below as a natural lead-in to additional content.',
-},
-{
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-    'This is a wider card with supporting text below as a natural lead-in to additional content.',
-},
-];
-
-
 const archives = [
 'March 2020',
 'February 2020',
@@ -113,8 +97,33 @@ const archives = [
 
 const social = ['GitHub', 'Twitter', 'Facebook'];
 
+export const query = graphql`
+query ($section: String!) {
+  allContentfulBlogPost (
+    sort: {
+      fields: publishedDate,
+      order: DESC
+    },
+    filter: {
+      topic: {
+        eq: $section
+      }
+    }
+  ) {
+    edges {
+      node {
+        title
+        description
+        publishedDate (
+          formatString: "MMMM Do, YYYY"
+        )
+      }
+    }
+  }
+}
+`
 
-export default function IndexPage() {
+export default function SectionPage(props) {
 
 const classes = useStyles();
 
@@ -122,38 +131,10 @@ return(
     <Layout>
         <Head title="Home"/>
         <main>
-{/* Main featured post */}
-<Paper className={classes.mainFeaturedPost}>
-  {/* Increase the priority of the hero background image */}
-  {
-    <img
-      style={{ display: 'none' }}
-      src="https://source.unsplash.com/user/erondu"
-      alt="background"
-    />
-  }
-  <div className={classes.overlay} />
-  <Grid container>
-    <Grid item md={6}>
-      <div className={classes.mainFeaturedPostContent}>
-        <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-          Title of a longer featured blog post
-        </Typography>
-        <Typography variant="h5" color="inherit" paragraph>
-          Multiple lines of text that form the lede, informing new readers quickly and
-          efficiently about what&apos;s most interesting in this post&apos;s contents.
-        </Typography>
-        <Link variant="subtitle1" href="#">
-          Continue reading…
-        </Link>
-      </div>
-    </Grid>
-  </Grid>
-</Paper>
 {/*  insertar Blog Component Aca (renombrar a preview) */}
 <Grid container spacing={5} className={classes.mainGrid}>
   {/* Main content */}
-  <BlogPreview />
+  <BlogPreview section={props.section} data={props.data} />
   {/* Sidebar */}
   <Grid item xs={12} md={4}>
     <Paper elevation={0} className={classes.sidebarAboutBox}>
