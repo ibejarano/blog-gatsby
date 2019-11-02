@@ -96,11 +96,23 @@ export default function Header() {
     `);
 
     const sections = [
-        'Desarrollo Web',
-        'Opinion',
-        'Salud',
-        'Politica'
-      ];
+      {
+        title: 'Inicio',
+        slug: '/'
+      }
+      ,{
+      title: 'Desarrollo Web',
+      slug: 'web-development'
+    },{
+      title: 'Opinion',
+      slug: 'opinion'
+    },{
+      title:  'Salud',
+      slug: 'health'
+    },{
+      title: 'Politica',
+      slug: 'politics'
+    }]
 
     return (
         <header>
@@ -126,12 +138,12 @@ export default function Header() {
                     <Link
                     color="inherit"
                     noWrap
-                    key={section}
+                    key={section.slug}
                     variant="body2"
-                    href="#"
+                    href={section.slug}
                     className={classes.toolbarLink}
                     >
-                    {section}
+                    {section.title}
                     </Link>
                 ))}
             </Toolbar>
