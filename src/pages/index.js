@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import BlogPreview from './blog';
 
+import Archives from '../components/archives';
+
 const useStyles = makeStyles(theme => ({
     toolbar: {
       borderBottom: `1px solid ${theme.palette.divider}`,
@@ -80,39 +82,10 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-const featuredPosts = [
-{
-    title: 'Featured post',
-    date: 'Nov 12',
-    description:
-    'This is a wider card with supporting text below as a natural lead-in to additional content.',
-},
-{
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-    'This is a wider card with supporting text below as a natural lead-in to additional content.',
-},
-];
-
-
-const archives = [
-'March 2020',
-'February 2020',
-'January 2020',
-'December 2019',
-'November 2019',
-'October 2019',
-'September 2019',
-'August 2019',
-'July 2019',
-'June 2019',
-'May 2019',
-'April 2019',
-];
-
-const social = ['GitHub', 'Twitter', 'Facebook'];
-
+const social = [{title:'GitHub', url: 'https://github.com/ibejarano'}, 
+                {title:'Twitter', url:'https://twitter.com/IgnacioBejara13'},
+                {title:'Facebook', url:'https://www.facebook.com/ignaciobejarano'},
+                {title:'LinkedIn', url:'https://www.linkedin.com/in/ignacio-sebasti%C3%A1n-bejarano-45287012b/'}];
 
 export default function IndexPage() {
 
@@ -166,20 +139,15 @@ return(
         Con estas premisas he resuelto crear un blog para expresarme de manera digital.
       </Typography>
     </Paper>
-    <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
-      Archives
-    </Typography>
-    {archives.map(archive => (
-      <Link display="block" variant="body1" href="#" key={archive}>
-        {archive}
-      </Link>
-    ))}
+    
+    <Archives />
+
     <Typography variant="h6" gutterBottom className={classes.sidebarSection}>
       Social
     </Typography>
     {social.map(network => (
-      <Link display="block" variant="body1" href="#" key={network}>
-        {network}
+      <Link display="block" variant="body1" href={network.url} key={network.title}>
+        {network.title}
       </Link>
     ))}
   </Grid>
