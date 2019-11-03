@@ -5,12 +5,12 @@ import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 
-function Copyright() {
+function Copyright({author}) {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
         <Link color="inherit" href="https://material-ui.com/">
-          Your Website
+          {author}
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
@@ -107,12 +107,12 @@ export default function Footer(){
         <footer className={classes.footer}>
            <Container maxWidth="lg">
                 <Typography variant="h6" align="center" gutterBottom>
-                Footer {data.site.siteMetadata.author}
+                Para sugerencias y feedback
                 </Typography>
-                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                Something here to give the footer a purpose!
+                <Typography variant="h6" align="center" color="textSecondary" component="p">
+                Contacto: <a href="mailto:ignbejarano@gmail.com" > Email </a>
                 </Typography>
-                <Copyright />
+                <Copyright author={data.site.siteMetadata.author} />
                 </Container>
         </footer>
     )
