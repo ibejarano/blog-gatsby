@@ -8,6 +8,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import Typography from '@material-ui/core/Typography';
+import { graphql, useStaticQuery} from 'gatsby';
 import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
@@ -43,7 +44,47 @@ export default function Archives(){
 
     const classes = useStyles();
 
+    // Ahora nuestr a tarea es obtener archives de Contentful
+    // 2. if NOT, entonces seguro puedo tomar todos los datos de GraphQl fechas
+            // y luego ordenarla como en el formato que puse arriba en archives
 
+    const data = useStaticQuery(graphql`
+        query {
+            allContentfulBlogPost {
+                edges {
+                node {
+                    title
+                    publishedDate (formatString: "MMMM YYYY")
+                }
+                }
+            }
+        }
+    `)
+
+    let archivesList = []
+    let newArchive = {
+        date: '',
+        posts: []
+    }
+    let currentMonth = ''
+    console.log(data.allContentfulBlogPost.edges)
+    data.allContentfulBlogPost.edges.map((post)=>{
+        if (!(currentMonth === post.node.publishedDate)) {
+            // MES NUEVO! NUEVA ENTRADA PLIS
+            if (newArchive.date != ''){
+                archivesList.push(newArchive)
+            }
+            newArchive = {
+                date: post.node.publishedDate,
+                posts: [post.node.title]
+            }
+        }
+        else {
+            newArchive.posts.push(post.node.title)
+        }
+    })
+
+    console.log(archivesList)
 
     return(
         <div>
