@@ -9,7 +9,6 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 
 import Typography from '@material-ui/core/Typography';
 import { graphql, useStaticQuery} from 'gatsby';
-import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,30 +22,10 @@ const useStyles = makeStyles(theme => ({
     }));
 
 
-const archives = [
-    {
-        date:'March 2020',
-        posts: [
-            'Erase una vez...truz',
-            'Maniana termina la tesis',
-            'da manha'
-        ]
-    },
-    {
-        date: 'February 2020',
-        posts: [ 'Alguna vez quizas sea posible',
-        'maniana jamas termina'
-        ]
-    }    
-    ];
 
 export default function Archives(){
 
     const classes = useStyles();
-
-    // Ahora nuestr a tarea es obtener archives de Contentful
-    // 2. if NOT, entonces seguro puedo tomar todos los datos de GraphQl fechas
-            // y luego ordenarla como en el formato que puse arriba en archives
 
     const data = useStaticQuery(graphql`
         query {
@@ -61,30 +40,23 @@ export default function Archives(){
         }
     `)
 
-    let archivesList = []
+    let archives = []
     let newArchive = {
         date: '',
         posts: []
     }
     let currentMonth = ''
-    console.log(data.allContentfulBlogPost.edges)
     data.allContentfulBlogPost.edges.map((post)=>{
         if (!(currentMonth === post.node.publishedDate)) {
-            // MES NUEVO! NUEVA ENTRADA PLIS
-            if (newArchive.date != ''){
-                archivesList.push(newArchive)
-            }
+            currentMonth = post.node.publishedDate
             newArchive = {
-                date: post.node.publishedDate,
-                posts: [post.node.title]
+                date: currentMonth,
+                posts: []
             }
+            archives.push(newArchive)
         }
-        else {
-            newArchive.posts.push(post.node.title)
-        }
+        archives[archives.length-1].posts.push(post.node.title)
     })
-
-    console.log(archivesList)
 
     return(
         <div>
