@@ -118,7 +118,9 @@ export default function Header() {
         <header>
             <CssBaseline />
             <Toolbar className={classes.toolbar}>
+              <Link href='subscribe' >
                 <Button size="small">Suscribirse</Button>
+              </Link>
                 <Typography
                     component="h2"
                     variant="h5"
