@@ -1,7 +1,5 @@
 import React from 'react';
-import Layout from '../components/layout';
 import { Link, graphql, useStaticQuery } from 'gatsby';
-import Head from '../components/head';
 
 import Divider from '@material-ui/core/Divider';
 

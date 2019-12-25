@@ -6,7 +6,7 @@
 
 module.exports = {
   siteMetadata: {
-    title: 'iBejarano Blog',
+    title: 'Ignacio Bejarano Blog',
     author: 'Ignacio Bejarano'
   },
   plugins: [
@@ -18,27 +18,11 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
       }
     },
-    'gatsby-plugin-sass',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'src',
         path: `${__dirname}/src/`
-      }
-    },
-    {
-      resolve:'gatsby-transformer-remark',
-      options: {
-        plugins: [
-          'gatsby-remark-relative-images',
-          {
-            resolve: 'gatsby-remark-images',
-            options: {
-              maxwidth: 750,
-              linkImagesToOriginal: false
-            }
-          }
-        ]
       }
     },
     'gatsby-plugin-sharp',

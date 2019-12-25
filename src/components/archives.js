@@ -1,11 +1,7 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import Collapse from '@material-ui/core/Collapse';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+
+import ArchiveItem from './archiveItem';
 
 import Typography from '@material-ui/core/Typography';
 import { graphql, useStaticQuery} from 'gatsby';
@@ -21,12 +17,10 @@ const useStyles = makeStyles(theme => ({
       },
     }));
 
-
-
 export default function Archives(){
 
     const classes = useStyles();
-
+    
     const data = useStaticQuery(graphql`
         query {
             allContentfulBlogPost {
@@ -64,32 +58,9 @@ export default function Archives(){
         Archives
         </Typography>
         {
-            archives.map((archive) => {
-                const [open, setOpen] = React.useState(false);
-
-                const handleClick = () => {
-                  setOpen(!open);
-                };
-                return(
-                    <List key={archive.date}>
-                        <ListItem button onClick={handleClick}>
-                            <ListItemText primary={`${archive.date} (${archive.posts.length})`} />
-                            {open ? <ExpandLess /> : <ExpandMore />}
-                        </ListItem>
-                        <Collapse in={open} timeout="auto" unmountOnExit>
-                            {archive.posts.map((post)=>{
-                                return (
-                                    <List component="div" disablePadding>
-                                        <ListItem button className={classes.nested}>
-                                            <ListItemText primary={post} />
-                                        </ListItem>
-                                    </List>
-                                );
-                            })}
-                        </Collapse>
-                    </List>
-                )
-            })
+            archives.map((archive) => (
+                <ArchiveItem key={archive} archive={archive} />
+            ))
         }
         </div>
     )

@@ -81,11 +81,6 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-const social = [{title:'GitHub', url: 'https://github.com/ibejarano'}, 
-                {title:'Twitter', url:'https://twitter.com/IgnacioBejara13'},
-                {title:'Facebook', url:'https://www.facebook.com/ignaciobejarano'},
-                {title:'LinkedIn', url:'https://www.linkedin.com/in/ignacio-sebasti%C3%A1n-bejarano-45287012b/'}];
-
 export default function IndexPage() {
 
 const classes = useStyles();
