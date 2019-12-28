@@ -1,16 +1,16 @@
-import React from 'react';
-import { Link, graphql, useStaticQuery } from 'gatsby';
+import React from "react"
+import { Link, graphql, useStaticQuery } from "gatsby"
 
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider"
 
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Hidden from '@material-ui/core/Hidden';
+import { makeStyles } from "@material-ui/core/styles"
+import Typography from "@material-ui/core/Typography"
+import Grid from "@material-ui/core/Grid"
+import Card from "@material-ui/core/Card"
+import CardActionArea from "@material-ui/core/CardActionArea"
+import CardContent from "@material-ui/core/CardContent"
+import CardMedia from "@material-ui/core/CardMedia"
+import Hidden from "@material-ui/core/Hidden"
 
 const useStyles = makeStyles(theme => ({
   toolbar: {
@@ -20,35 +20,35 @@ const useStyles = makeStyles(theme => ({
     flex: 1,
   },
   toolbarSecondary: {
-    justifyContent: 'space-between',
-    overflowX: 'auto',
+    justifyContent: "space-between",
+    overflowX: "auto",
   },
   toolbarLink: {
     padding: theme.spacing(1),
     flexShrink: 0,
   },
   mainFeaturedPost: {
-    position: 'relative',
+    position: "relative",
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: 'url(https://source.unsplash.com/user/erondu)',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
+    backgroundImage: "url(https://source.unsplash.com/user/erondu)",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
   },
   overlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     bottom: 0,
     right: 0,
     left: 0,
-    backgroundColor: 'rgba(0,0,0,.3)',
+    backgroundColor: "rgba(0,0,0,.3)",
   },
   mainFeaturedPostContent: {
-    position: 'relative',
+    position: "relative",
     padding: theme.spacing(3),
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up("md")]: {
       padding: theme.spacing(6),
       paddingRight: 0,
     },
@@ -57,8 +57,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3),
   },
   card: {
-    display: 'flex',
-    marginBottom: '1rem'
+    display: "flex",
+    marginBottom: "1rem",
   },
   cardDetails: {
     flex: 1,
@@ -83,75 +83,78 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(6, 0),
   },
   link: {
-    textDecoration: 'none',
+    textDecoration: "none",
   },
-}));
+}))
 
 const BlogPreview = () => {
+  const classes = useStyles()
 
-  const classes = useStyles();
-
-    const data = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     query {
-      allContentfulBlogPost ( sort: { fields: publishedDate, order: DESC } ) {
+      allContentfulBlogPost(sort: { fields: publishedDate, order: DESC }) {
         edges {
           node {
             title
             slug
             description
             topic
-            publishedDate (
-              formatString: "MMMM Do, YYYY"
-            )
+            publishedDate(formatString: "MMMM Do, YYYY")
+            postImage {
+              file {
+                url
+              }
+            }
           }
         }
       }
     }
-    `)
+  `)
 
-  const BlogTitles = data.allContentfulBlogPost.edges.map( (post) => {
-        return(
-          <Grid item key={post.node.title}>
-          <Link to={`/blog/${post.node.slug}`} className={classes.link}>
-            <CardActionArea   >
-              <Card className={classes.card}>
-                <div className={classes.cardDetails}>
-                  <CardContent>
-                    <Typography component="h2" variant="h5">
-                      {post.node.title}
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                      {post.node.publishedDate}
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                      {post.node.description}
-                    </Typography>
-                    <Typography variant="subtitle2" color="primary">
-                      Cotinuar leyendo...
-                    </Typography>
-                  </CardContent>
-                </div>
+  const BlogTitles = data.allContentfulBlogPost.edges.map(post => {
+    return (
+      <Grid item key={post.node.title}>
+        <Link to={`/blog/${post.node.slug}`} className={classes.link}>
+          <CardActionArea>
+            <Card className={classes.card}>
+              <div className={classes.cardDetails}>
+                <CardContent>
+                  <Typography component="h2" variant="h5">
+                    {post.node.title}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    {post.node.publishedDate}
+                  </Typography>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    {post.node.description}
+                  </Typography>
+                  <Typography variant="subtitle2" color="primary">
+                    Continuar leyendo...
+                  </Typography>
+                </CardContent>
+              </div>
+              {post.node.postImage && (
                 <Hidden xsDown>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
-                    />
+                    image={post.node.postImage.file.url}
+                    title={post.node.title}
+                  />
                 </Hidden>
-              </Card>
-            </CardActionArea>
-          </Link>
-          <Divider />
-
-        </Grid>
-        )
-    })
-
-    return(
-          <Grid item spacing={5} xs={12} md={8} >
-            {BlogTitles}
-          </Grid>
+              )}
+            </Card>
+          </CardActionArea>
+        </Link>
+        <Divider />
+      </Grid>
     )
+  })
+
+  return (
+    <Grid item spacing={5} xs={12} md={8}>
+      {BlogTitles}
+    </Grid>
+  )
 }
 
-export default BlogPreview;
+export default BlogPreview
