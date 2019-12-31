@@ -95,7 +95,7 @@ const BlogPreview = ( { data } ) => {
   const BlogTitles = data.allContentfulBlogPost.edges.map( (post) => {
         return(
           <Grid item key={post.node.title}>
-          <Link to={`/blog/${post.node.slug}`} className={classes.link}>
+          <Link to={`/blog/${post.node.slug}`}>
             <CardActionArea   >
               <Card className={classes.card}>
                 <div className={classes.cardDetails}>

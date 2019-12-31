@@ -6,31 +6,33 @@
 
 module.exports = {
   siteMetadata: {
-    title: 'Ignacio Bejarano Blog',
-    author: 'Ignacio Bejarano'
+    title: "Ignacio Bejarano Blog",
+    author: "Ignacio Bejarano",
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-material-ui",
     {
-      resolve: 'gatsby-source-contentful',
+      resolve: "gatsby-source-contentful",
       options: {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
-      }
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+      },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'src',
-        path: `${__dirname}/src/`
-      }
+        name: "src",
+        path: `${__dirname}/src/`,
+      },
     },
-    'gatsby-plugin-sharp',
+    "gatsby-plugin-sharp",
     {
-      resolve: 'gatsby-plugin-mailchimp',
+      resolve: "gatsby-plugin-mailchimp",
       options: {
-          endpoint: 'https://gmail.us5.list-manage.com/subscribe/post?u=f000b62e1d712a2c582cc09d6&amp;id=0e634ec705',
-            },
-    }
-  ]
+        endpoint:
+          "https://gmail.us5.list-manage.com/subscribe/post?u=f000b62e1d712a2c582cc09d6&amp;id=0e634ec705",
+      },
+    },
+  ],
 }
